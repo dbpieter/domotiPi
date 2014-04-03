@@ -1,0 +1,32 @@
+body {
+  margin-top: 20px;
+}
+
+.edit {
+  margin-top: 8px;
+}
+
+.glyph-big {
+  font-size: 20px;
+}
+
+canvas  {
+  width: 100% !important;
+  max-width: 800px;
+  height: auto !important;
+}
+
+.cron-device {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.cron-devices li:first-child {
+  padding-top: 0px;
+}
+
+.cron-devices li:last-child {
+  padding-bottom: 0px;
+  border-bottom: none;
+}

@@ -2,17 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>PiControl | Overzicht</title>
+    <title>PiControl | Overview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
-    <link href="css/alt/yetibootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/alt/yetibootstrap.min.css" rel="stylesheet">
 
     <!-- Loading switch css -->
-    <link href="css/bootstrap-switch.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-switch.min.css" rel="stylesheet">
 
     <!-- Loading custom CSS -->
-    <link href="css/interface.css" rel="stylesheet">
+    <link href="assets/css/interface.css" rel="stylesheet">
 
     <!-- favicon -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -28,42 +28,44 @@
 
       <!-- Navigation bar -->
       <nav class="navbar navbar-inverse navbar-default" role="navigation">
-    		<div class="navbar-header">
-			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-			    <a class="navbar-brand" href="#">PiControl</a>
-			  </div>
-			  <div class="collapse navbar-collapse" id="navbar-collapse-01">
-			    <ul class="nav navbar-nav">
-			      <li class="active"><a href="#"><i class="glyphicon glyphicon-th"></i> Overzicht</a></li>
-			      <li><a href="#"><i class="glyphicon glyphicon-calendar"></i> Schema&apos;s</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Logboek</a></li>
-			      <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Instellingen</a></li>
-			     </ul>
-           <p class="navbar-text navbar-right">Ingelogd as <a href="#" class="navbar-link">Hans Ott</a></p>
-			  </div>
-    	</nav>
+          <a class="navbar-brand" href="#">PiControl</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-01">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="overview.html"><i class="glyphicon glyphicon-th"></i> Overview</a></li>
+            <li><a href="schemas.html"><i class="glyphicon glyphicon-calendar"></i> Schedules</a></li>
+            <li><a href="log.html"><i class="glyphicon glyphicon-list-alt"></i> Logbook</a></li>
+            <li><a href="settings.html"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
+           </ul>
+           <p class="navbar-text navbar-right">Singed in as <a href="#" class="navbar-link">Hans Ott</a></p>
+        </div>
+      </nav>
       <!-- end navigation -->
 
       <div id="overview">
+
         <div id="errors">
           <div class="alert alert-danger alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <strong><i class="glyphicon glyphicon-warning-sign"></i></strong>  &quot;Keuken verlichting&quot; kan niet worden inschakeld. Bekijk logboek voor meer informatie.
+            <strong><i class="glyphicon glyphicon-warning-sign"></i></strong>  &quot;Kitchen lights&quot; can't be switched on. View logbook for more information.
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-3">
             <!-- start tools -->
             <div id="tools">
               <ul class="list-group">
-                <li class="list-group-item"><a href="#">Alle apparaten uitschakelen</a></li>
-                <li class="list-group-item"><a href="#">Alle apparaten inschakelen</a></li>
-                <li class="list-group-item"><a href="#" data-toggle="modal" data-target="#addDevice"><i class="glyphicon glyphicon-plus"></i> Voeg een apparaat toe</a></li>
+                <li class="list-group-item"><a href="#">Switch all devices OFF</a></li>
+                <li class="list-group-item"><a href="#">Switch all devices ON</a></li>
+                <li class="list-group-item"><a href="#" data-toggle="modal" data-target="#addDevice"><i class="glyphicon glyphicon-plus"></i> Add a device</a></li>
               </ul>
             </div>
             <!-- end tools -->
@@ -74,10 +76,10 @@
               <div class="col-md-4">
                 <div class="device">
                   <div class="well well-sm">
-                    <h4 class="title">Keuken verlichting</h4>
+                    <h4 class="title">Kitchen lights</h4>
                     <input class="switch" type="checkbox" /><br>
                     <p class="edit">
-                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Wijzigen</a>
+                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Modify</a>
                     </p>
                   </div>
                 </div>
@@ -85,10 +87,10 @@
               <div class="col-md-4">
                 <div class="device">
                   <div class="well well-sm">
-                    <h4 class="title">Living verlichting</h4>
+                    <h4 class="title">Bedroom lights</h4>
                     <input class="switch" type="checkbox" checked /><br>
                     <p class="edit">
-                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Wijzigen</a>
+                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Modify</a>
                     </p>
                   </div>
                 </div>
@@ -96,10 +98,10 @@
               <div class="col-md-4">
                 <div class="device">
                   <div class="well well-sm">
-                    <h4 class="title">TV slaapkamer</h4>
+                    <h4 class="title">TV</h4>
                     <input class="switch" type="checkbox" /><br>
                     <p class="edit">
-                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Wijzigen</a>
+                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Modify</a>
                     </p>
                   </div>
                 </div>
@@ -107,10 +109,10 @@
               <div class="col-md-4">
                 <div class="device">
                   <div class="well well-sm">
-                    <h4 class="title">TV living</h4>
+                    <h4 class="title">Toilet light</h4>
                     <input class="switch" type="checkbox" checked /><br>
                     <p class="edit">
-                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Wijzigen</a>
+                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Modify</a>
                     </p>
                   </div>
                 </div>
@@ -118,10 +120,10 @@
               <div class="col-md-4">
                 <div class="device">
                   <div class="well well-sm">
-                    <h4 class="title">Keuken verlichting</h4>
+                    <h4 class="title">Kitchen lights</h4>
                     <input class="switch" type="checkbox" /><br>
                     <p class="edit">
-                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Wijzigen</a>
+                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Modify</a>
                     </p>
                   </div>
                 </div>
@@ -129,10 +131,10 @@
               <div class="col-md-4">
                 <div class="device">
                   <div class="well well-sm">
-                    <h4 class="title">Keuken verlichting</h4>
+                    <h4 class="title">Kitchen lights</h4>
                     <input class="switch" type="checkbox" checked /><br>
                     <p class="edit">
-                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Wijzigen</a>
+                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Modify</a>
                     </p>
                   </div>
                 </div>
@@ -140,10 +142,10 @@
               <div class="col-md-4">
                 <div class="device">
                   <div class="well well-sm">
-                    <h4 class="title">Keuken verlichting</h4>
+                    <h4 class="title">Kitchen lights</h4>
                     <input class="switch" type="checkbox" /><br>
                     <p class="edit">
-                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Wijzigen</a>
+                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Modify</a>
                     </p>
                   </div>
                 </div>
@@ -151,10 +153,10 @@
               <div class="col-md-4">
                 <div class="device">
                   <div class="well well-sm">
-                    <h4 class="title">Keuken verlichting</h4>
+                    <h4 class="title">Kitchen lights</h4>
                     <input class="switch" type="checkbox" checked /><br>
                     <p class="edit">
-                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Wijzigen</a>
+                      <a href="#" data-toggle="modal" data-target="#deviceSettings">Modify</a>
                     </p>
                   </div>
                 </div>
@@ -162,7 +164,7 @@
               <div class="col-md-12">
                 <div class="well">
                   <div class="chart">
-                    <h4 class="title">Temperatuur</h4>
+                    <h4 class="title">Temperature</h4>
                     <canvas id="temperature" width="800" height="400"></canvas>
                   </div>
                 </div>
@@ -177,17 +179,17 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title">Keuken verlichting</h4>
+                      <h4 class="modal-title">Kitchen lights</h4>
                     </div>
                     <div class="modal-body">
                       <form role="form">
                         <div class="form-group">
-                          <label for="naamApparaat">Naam apparaat:</label>
-                          <input type="text" class="form-control" id="naamApparaat" placeholder="Keuken verlichting">
+                          <label for="naamApparaat">Name: </label>
+                          <input type="text" class="form-control" id="naamApparaat" placeholder="Kitchen lights">
                         </div>
                       </form>
                       <p>
-                        <i class="glyphicon glyphicon-info-sign"></i> Aangesloten op GPIO 1.
+                        <i class="glyphicon glyphicon-info-sign"></i> Connected to GPIO 1.
                       </p>
                       <button class="btn btn-danger btn-xs">Verwijder</button>
                     </div>
@@ -244,9 +246,9 @@
 
     <!-- Load JS here for greater good =============================-->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-switch.min.js"></script>
-    <script src="js/interface.js"></script>
-    <script src="js/Chart.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-switch.min.js"></script>
+    <script src="assets/js/interface.js"></script>
+    <script src="assets/js/Chart.min.js"></script>
   </body>
 </html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>PiControl | Schedules</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="assets/css/alt/yetibootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading switch css -->
+    <link href="assets/css/bootstrap-switch.min.css" rel="stylesheet">
+
+    <!-- Loading cron css -->
+    <link href="assets/css/jquery-cron.css" rel="stylesheet">
+
+    <!-- Loading custom CSS -->
+    <link href="assets/css/interface.css" rel="stylesheet">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="container">
+
+      <!-- Navigation bar -->
+      <nav class="navbar navbar-inverse navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">PiControl</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-01">
+          <ul class="nav navbar-nav">
+            <li><a href="overview.html"><i class="glyphicon glyphicon-th"></i> Overview</a></li>
+            <li class="active"><a href="schemas.html"><i class="glyphicon glyphicon-calendar"></i> Schedules</a></li>
+            <li><a href="log.html"><i class="glyphicon glyphicon-list-alt"></i> Logbook</a></li>
+            <li><a href="settings.html"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
+           </ul>
+           <p class="navbar-text navbar-right">Singed in as <a href="#" class="navbar-link">Hans Ott</a></p>
+        </div>
+      </nav>
+      <!-- end navigation -->
+
+      <div id="overview">
+
+        <div id="errors">
+          <!--<div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong><i class="glyphicon glyphicon-warning-sign"></i></strong>  &quot;Keuken verlichting&quot; kan niet worden inschakeld. Bekijk logboek voor meer informatie.
+          </div> -->
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <!-- start tools -->
+            <div id="tools">
+              <ul class="list-group">
+                <li class="list-group-item"><a href="#">Enable all schedules</a></li>
+                <li class="list-group-item"><a href="#">Disable all schedules</a></li>
+                <li class="list-group-item"><a href="#" data-toggle="modal" data-target="#addSchema"><i class="glyphicon glyphicon-plus"></i> Add a schedule</a></li>
+              </ul>
+            </div>
+            <!-- end tools -->
+          </div>
+          <!-- start schemas -->
+          <div class="col-md-9">
+            <div id="schedules">
+              <div class="panel-group" id="accordion">
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <input type="checkbox" class="schedule-enable" checked />
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        Workweek
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <ul class="rules">
+                            <li class="rule">
+                              <div class="rule-description">
+                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                              </div>
+                              <ul class="rule-devices">
+                                <li class="rule-device">
+                                  Kitchen lights: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  TV: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  Toilet light: <strong>OFF</strong>
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="rule">
+                              <div class="rule-description">
+                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                              </div>
+                              <ul class="rule-devices">
+                                <li class="rule-device">
+                                  Kitchen lights: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  TV: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  Toilet light: <strong>OFF</strong>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              <div class="add-rule">
+                                <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <input type="checkbox" class="schedule-enable" />
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                        Vacation
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <ul class="rules">
+                            <li class="rule">
+                              <div class="rule-description">
+                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                              </div>
+                              <ul class="rule-devices">
+                                <li class="rule-device">
+                                  Kitchen lights: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  TV: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  Toilet light: <strong>OFF</strong>
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="rule">
+                              <div class="rule-description">
+                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                              </div>
+                              <ul class="rule-devices">
+                                <li class="rule-device">
+                                  Kitchen lights: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  TV: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  Toilet light: <strong>OFF</strong>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              <div class="add-rule">
+                                <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <input type="checkbox" class="schedule-enable" />
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                        Another schedule
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <ul class="rules">
+                            <li class="rule">
+                              <div class="rule-description">
+                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                              </div>
+                              <ul class="rule-devices">
+                                <li class="rule-device">
+                                  Kitchen lights: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  TV: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  Toilet light: <strong>OFF</strong>
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="rule">
+                              <div class="rule-description">
+                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                              </div>
+                              <ul class="rule-devices">
+                                <li class="rule-device">
+                                  Kitchen lights: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  TV: <strong>ON</strong>
+                                </li>
+                                <li class="rule-device">
+                                  Toilet light: <strong>OFF</strong>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              <div class="add-rule">
+                                <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <!-- end schemas -->
+        </div>
+      </div>
+
+      <div id="dialogs">
+
+        <!-- ADD NEW SCHEDULE MODAL -->
+        <div class="modal fade" id="addSchema" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add a schedule</h4>
+              </div>
+              <div class="modal-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label for="nameSchema">Name: </label>
+                    <input type="text" class="form-control" id="nameSchema" placeholder="Workweek, vacation, ...">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Annuleren</button>
+                <button type="button" class="btn btn-primary btn-sm">Voeg schema toe</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- EDIT RULE MODAL -->
+        <div class="modal fade" id="editRule" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Edit rule</h4>
+              </div>
+              <div class="modal-body">
+                <div class="cron"></div>
+                <hr>
+                <ul class="cron-devices">
+                  <li class="cron-device">
+                    Kitchen lights:
+                    <select class="cron-device-value">
+                      <option>ON</option>
+                      <option>OFF</option>
+                    </select>
+                    <a href="#" class="delete-cron-device pull-right"><i class="glyphicon glyphicon-remove"></i></a>
+                  </li>
+                  <li class="cron-device">
+                    TV:
+                    <select class="cron-device-value">
+                      <option>ON</option>
+                      <option>OFF</option>
+                    </select>
+                    <a href="#" class="delete-cron-device pull-right"><i class="glyphicon glyphicon-remove"></i></a>
+                  </li>
+                  <li class="cron-device">
+                    Toilet light:
+                    <select class="cron-device-value">
+                      <option>ON</option>
+                      <option>OFF</option>
+                    </select>
+                    <a href="#" class="delete-cron-device pull-right"><i class="glyphicon glyphicon-remove"></i></a>
+                  </li>
+                </ul>
+                <hr>
+                <div class="add-cron-device">
+                  <form role="form">
+                    <div class="form-group">
+                      <label for="select-cron-device">Choose a device</label>
+                      <select class="form-control">
+                        <option>Kitchen lights</option>
+                        <option>TV</option>
+                        <option>Toilet light</option>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm add-cron-device-btn">Add</button>
+                  </form>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary btn-sm">Save</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- NEW RULE MODAL -->
+        <div class="modal fade" id="new-rule" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New rule for &lt;name of schedule&gt;</h4>
+              </div>
+              <div class="modal-body">
+                <div class="cron"></div>
+                <hr>
+                <ul class="cron-devices">
+                  No devices yet. Add a device!
+                </ul>
+                <hr>
+                <div class="add-cron-device">
+                  <form role="form">
+                    <div class="form-group">
+                      <label for="select-cron-device">Choose a device</label>
+                      <select class="form-control">
+                        <option>Kitchen lights</option>
+                        <option>TV</option>
+                        <option>Toilet light</option>
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm add-cron-device-btn">Add</button>
+                  </form>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary btn-sm">Save</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+      </div>
+
+    </div>
+
+    <!-- Load JS here for greater good =============================-->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-switch.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
+    <script src="assets/js/jquery-cron.js"></script>
+    <script src="assets/js/schemas.js"></script>
+    <script src="assets/js/interface.js"></script>
+
+  </body>
+</html>
