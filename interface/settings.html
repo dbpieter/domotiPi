@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>PiControl | Overzicht</title>
+    <title>PiControl | Settings</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
@@ -10,6 +10,9 @@
 
     <!-- Loading switch css -->
     <link href="assets/css/bootstrap-switch.min.css" rel="stylesheet">
+
+    <!-- Loading cron css -->
+    <link href="assets/css/jquery-cron.css" rel="stylesheet">
 
     <!-- Loading custom CSS -->
     <link href="assets/css/interface.css" rel="stylesheet">
@@ -50,6 +53,69 @@
       </nav>
       <!-- end navigation -->
 
+      <div id="overview">
+
+        <!-- the errors will show here -->
+        <div id="errors">
+          <!--<div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong><i class="glyphicon glyphicon-warning-sign"></i></strong>  &quot;Keuken verlichting&quot; kan niet worden inschakeld. Bekijk logboek voor meer informatie.
+          </div> -->
+        </div>
+        <!-- end errors -->
+
+        <div class="row">
+          <!-- start settings -->
+          <div class="col-md-12">
+            <h3>Settings</h3>
+            <hr>
+
+            <div id="accounts">
+              <div class="row">
+                <div class="col-md-6">
+                  <h4>Accounts</h4>
+                  <ul class="list-group">
+                    <li class="list-group-item user"><i class="glyphicon glyphicon-user"></i> <span class="user-name">Hans Ott</span> <span class="pull-right"><a class="edit-user" href="#">User Settings</a></span></li>
+                    <li class="list-group-item user"><i class="glyphicon glyphicon-user"></i> <span class="user-name">Alexander Delemarre</span> <span class="pull-right"><a class="edit-user" href="#">User Settings</a></span></li>
+                    <li class="list-group-item user"><i class="glyphicon glyphicon-user"></i> <span class="user-name">Pieter De Bruyne</span> <span class="pull-right"><a class="edit-user" href="#">User Settings</a></span></li>
+                    <li class="list-group-item">
+                      <a href="#" class="add-user">Add user</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div id="interval">
+              <div class="row">
+                <div class="col-md-6">
+                  <h4>Temperature update interval</h4>
+                  <div class="form-group">
+                    <select class="form-control" id="temperature-interval">
+                      <option>30 seconds</option>
+                      <option>1 minute</option>
+                      <option>5 minutes</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-primary">Save settings</button>
+              </div>
+            </div>
+          </div>
+          <!-- end settings -->
+        </div>
+      </div>
+
+      <div id="dialogs">
+
+      </div>
 
     </div>
 
@@ -57,7 +123,10 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/bootstrap-switch.min.js"></script>
-    <script src="assets/js/interface.js"></script>
     <script src="assets/js/chart.min.js"></script>
+    <script src="assets/js/jquery-cron.js"></script>
+    <script src="assets/js/schemas.js"></script>
+    <script src="assets/js/interface.js"></script>
+
   </body>
 </html>

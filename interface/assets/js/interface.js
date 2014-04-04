@@ -1,7 +1,30 @@
+function createAutoClosingAlert(selector, delay) {
+   var alert = $(selector).alert();
+   window.setTimeout(function() { alert.alert('close') }, delay);
+}
+
+function showError(msg) {
+  var error = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong><i class="glyphicon glyphicon-warning-sign"></i></strong> ' + msg  + '</div>';
+  $('#errors').append(error);
+  createAutoClosingAlert('.alert', 5000);
+}
+
 function initSwitches() {
   // init all switches
   $('.switch').bootstrapSwitch();
-
+  $('#turn-on-all-devices').on('click', function() {
+    $.each($('.switch'), function(index) {
+      $(this).bootstrapSwitch('state', true);
+      // AJAX CALL
+    });
+    // showError('There was a problem. Check logbook!');
+  });
+  $('#turn-off-all-devices').on('click', function() {
+    $.each($('.switch'), function(index) {
+      $(this).bootstrapSwitch('state', false);
+      // AJAX CALL
+    });
+  });
 }
 
 function createChart() {

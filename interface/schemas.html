@@ -67,8 +67,8 @@
             <!-- start tools -->
             <div id="tools">
               <ul class="list-group">
-                <li class="list-group-item"><a href="#">Enable all schedules</a></li>
-                <li class="list-group-item"><a href="#">Disable all schedules</a></li>
+                <li class="list-group-item"><a id="enable-all-schedules" href="#">Enable all schedules</a></li>
+                <li class="list-group-item"><a id="disable-all-schedules" href="#">Disable all schedules</a></li>
                 <li class="list-group-item"><a href="#" data-toggle="modal" data-target="#addSchema"><i class="glyphicon glyphicon-plus"></i> Add a schedule</a></li>
               </ul>
             </div>
@@ -79,180 +79,185 @@
             <div id="schedules">
               <div class="panel-group" id="accordion">
 
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <input type="checkbox" class="schedule-enable" checked />
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                        Workweek
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapse1" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <ul class="rules">
-                            <li class="rule">
-                              <div class="rule-description">
-                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
-                              </div>
-                              <ul class="rule-devices">
-                                <li class="rule-device">
-                                  Kitchen lights: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  TV: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  Toilet light: <strong>OFF</strong>
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="rule">
-                              <div class="rule-description">
-                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
-                              </div>
-                              <ul class="rule-devices">
-                                <li class="rule-device">
-                                  Kitchen lights: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  TV: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  Toilet light: <strong>OFF</strong>
-                                </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <div class="add-rule">
-                                <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
-                              </div>
-                            </li>
-                          </ul>
+                <div class="schedule">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <input type="checkbox" class="schedule-enable" checked />
+                        <a class="schedule-title" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                          Workweek
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <ul class="rules">
+                              <li class="rule">
+                                <div class="rule-description">
+                                  Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </div>
+                                <ul class="rule-devices">
+                                  <li class="rule-device">
+                                    Kitchen lights: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    TV: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    Toilet light: <strong>OFF</strong>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li class="rule">
+                                <div class="rule-description">
+                                  Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </div>
+                                <ul class="rule-devices">
+                                  <li class="rule-device">
+                                    Kitchen lights: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    TV: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    Toilet light: <strong>OFF</strong>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li>
+                                <div class="add-rule">
+                                  <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <input type="checkbox" class="schedule-enable" />
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                        Vacation
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapse2" class="panel-collapse collapse">
-                    <div class="panel-body">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <ul class="rules">
-                            <li class="rule">
-                              <div class="rule-description">
-                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
-                              </div>
-                              <ul class="rule-devices">
-                                <li class="rule-device">
-                                  Kitchen lights: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  TV: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  Toilet light: <strong>OFF</strong>
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="rule">
-                              <div class="rule-description">
-                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
-                              </div>
-                              <ul class="rule-devices">
-                                <li class="rule-device">
-                                  Kitchen lights: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  TV: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  Toilet light: <strong>OFF</strong>
-                                </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <div class="add-rule">
-                                <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
-                              </div>
-                            </li>
-                          </ul>
+                <div class="schedule">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <input type="checkbox" class="schedule-enable" />
+                        <a class="schedule-title" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                          Vacation
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <ul class="rules">
+                              <li class="rule">
+                                <div class="rule-description">
+                                  Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </div>
+                                <ul class="rule-devices">
+                                  <li class="rule-device">
+                                    Kitchen lights: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    TV: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    Toilet light: <strong>OFF</strong>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li class="rule">
+                                <div class="rule-description">
+                                  Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </div>
+                                <ul class="rule-devices">
+                                  <li class="rule-device">
+                                    Kitchen lights: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    TV: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    Toilet light: <strong>OFF</strong>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li>
+                                <div class="add-rule">
+                                  <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <input type="checkbox" class="schedule-enable" />
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                        Another schedule
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapse3" class="panel-collapse collapse">
-                    <div class="panel-body">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <ul class="rules">
-                            <li class="rule">
-                              <div class="rule-description">
-                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
-                              </div>
-                              <ul class="rule-devices">
-                                <li class="rule-device">
-                                  Kitchen lights: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  TV: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  Toilet light: <strong>OFF</strong>
-                                </li>
-                              </ul>
-                            </li>
-                            <li class="rule">
-                              <div class="rule-description">
-                                Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
-                              </div>
-                              <ul class="rule-devices">
-                                <li class="rule-device">
-                                  Kitchen lights: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  TV: <strong>ON</strong>
-                                </li>
-                                <li class="rule-device">
-                                  Toilet light: <strong>OFF</strong>
-                                </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <div class="add-rule">
-                                <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
-                              </div>
-                            </li>
-                          </ul>
+                <div class="schedule">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <input type="checkbox" class="schedule-enable" />
+                        <a class="schedule-title" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                          Another schedule
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <ul class="rules">
+                              <li class="rule">
+                                <div class="rule-description">
+                                  Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </div>
+                                <ul class="rule-devices">
+                                  <li class="rule-device">
+                                    Kitchen lights: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    TV: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    Toilet light: <strong>OFF</strong>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li class="rule">
+                                <div class="rule-description">
+                                  Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                                </div>
+                                <ul class="rule-devices">
+                                  <li class="rule-device">
+                                    Kitchen lights: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    TV: <strong>ON</strong>
+                                  </li>
+                                  <li class="rule-device">
+                                    Toilet light: <strong>OFF</strong>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li>
+                                <div class="add-rule">
+                                  <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
 
               </div>
             </div>
