@@ -108,6 +108,13 @@ ICConnection.prototype.setPin = function(pinNumber, value) {
     }
 };
 
+ICConnection.prototype.allOff = function(){
+    this.sendToIC(OLATA,[0x0]);
+    this.sendToIC(OLATB,[0x0]);
+    this.setCurrentOLAT('A',0x0);
+    this.setCurrentOLAT('B',0x0);
+};
+
 ICConnection.prototype.getPin = function(pinNumber) {
     if (pinNumber < 0 || pinNumber > 16) {
         console.log('ERROR: invalid pin number at getPin()');
@@ -137,9 +144,9 @@ ICConnection.prototype.isPinValid = function(pinNumber) {
 ICConnection.prototype.getStatus = function() {
     var status = new Array();
     for (var i = 0; i < 16; i++) {
-        status[i] = {'pin':i,'enabled': this.getPin(i)}
+        status[i] = {'pin':i,'enabled': this.getPin(i)};
     }
-    return status
-}
+    return status;
+};
 
 module.exports = ICConnection;

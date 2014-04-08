@@ -1,11 +1,12 @@
 {
-  "name": "proj1",
+  "name": "picontrol",
   "description": "gpio hardware server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
     "express": "3.x",
     "cron": "*",
-    "i2c": "*"
+    "i2c": "*",
+    "sqlite3": "*"
   }
 }
