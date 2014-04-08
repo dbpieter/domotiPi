@@ -127,12 +127,19 @@ ICConnection.prototype.getPin = function(pinNumber) {
     }
 };
 
-//var test = new ICConnection();
-//test.setPin(8, 1);
-//test.setPin(7, 1);
-//
-//for (var i = 0; i < 16; i++) {
-//    console.log(i + ':' + test.getPin(i) + '\n');
-//}
+ICConnection.prototype.isPinValid = function(pinNumber) {
+    if (pinNumber < 0 || pinNumber > 15) {
+        return false;
+    }
+    return true;
+};
+
+ICConnection.prototype.getStatus = function() {
+    var status = new Array();
+    for (var i = 0; i < 16; i++) {
+        status[i] = {'pin':i,'enabled': this.getPin(i)}
+    }
+    return status
+}
 
 module.exports = ICConnection;
