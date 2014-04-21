@@ -5,10 +5,19 @@ var fs = require('fs');
 var scheduler = require('./scheduler.js');
 var db = require('./db.js');
 
-var icc = require('./icconnection.js');
-var iccon = new icc();
+var iccon = require('./icconnection.js');
 
 var app = express();
+
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded()); // to support URL-encoded bodies
+
+
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 
 //useless atm
 app.get('/', function(req, res) {
@@ -24,6 +33,11 @@ app.get('/pins', function(req, res) {
 //turns all pins off
 app.get('/pins/alloff', function(req, res) {
     iccon.allOff();
+    res.end();
+});
+
+app.get('/pins/allon', function(req, res) {
+    iccon.allOn();
     res.end();
 });
 
@@ -56,6 +70,21 @@ app.get('/pins/:nr/on', function(req, res) {
     res.end();
 });
 
+//show devices
+app.get('/devices', function(req, res){
+    db.getDb().all('select * from devices ', function(err, rows){
+         if (err) {
+            console.log(err);
+            res.status('500').send('db error');
+            res.end();
+            return;
+        }
+        res.send(rows);
+        res.end();
+    });
+
+});
+
 //gets the current temperature
 app.get('/temp', function(req, res) {
     fs.readFile('/sys/bus/w1/devices/10-000802aafc40/w1_slave', 'utf8', function(err, data) {
@@ -73,8 +102,8 @@ app.get('/temp', function(req, res) {
 });
 
 //gets all temperatures
-app.get('/templog', function(req, res) {
-    db.getDb().all('select * from temperatures', function(err, rows) {
+app.get('/templog/:nr', function(req, res) {
+    db.getDb().all('select * from temperatures order by time asc limit ?', req.params.nr, function(err, rows) {
         if (err) {
             console.log(err);
             res.status('500').send('db error');
@@ -86,6 +115,43 @@ app.get('/templog', function(req, res) {
     });
 });
 
+//post device
+app.post('/devices', function(req, res) {
+    var name = req.param('name');
+    var pinnumber = req.param('pinnumber');
+    if(name == null || pinnumber == null) {
+        res.statusCode = 400;
+        return res.send('Error 400: Post syntax incorrect.');
+    }
+  db.getDb().run('insert into devices (name, pinnumber) values (?,?)', name, pinnumber);
+  res.json(true);
+});
 
-app.listen(80);
-console.log('Server listening op port 80');
+//delete device
+app.delete('/devices', function(req, res) {
+    var id = req.param('id');
+    if(id == null){
+        res.statusCode = 400;
+        return res.send('Error 400: delete syntax incorrect.');
+    }
+    db.getDb().run('delete from devices where devices.id = ?', id);
+    res.json(true);
+});
+
+app.listen(8080);
+console.log('Server listening op port 8080');
+
+//update device
+app.put('/devices', function(req, res){
+    var id = req.param('id');
+    var name = req.param('name');
+    var pinnumber = req.param('pinnumber');
+    if(id == null || name == null || pinnumber == null){
+        res.statusCode = 400;
+        return res.send('Error 400: update syntax incorrect.');
+    }
+    db.getDb().run('update devices set devices.name = ?, devices.pinnumber = ? where devices.id = ?', name, pinnumber, id);
+    res.json(true);
+});
+
+

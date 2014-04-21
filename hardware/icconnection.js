@@ -115,6 +115,13 @@ ICConnection.prototype.allOff = function(){
     this.setCurrentOLAT('B',0x0);
 };
 
+ICConnection.prototype.allOn = function(){
+    this.sendToIC(OLATA,[0xFF]);
+    this.sendToIC(OLATB,[0xFF]);
+    this.setCurrentOLAT('A',0xFF);
+    this.setCurrentOLAT('B',0xFF);
+}
+
 ICConnection.prototype.getPin = function(pinNumber) {
     if (pinNumber < 0 || pinNumber > 16) {
         console.log('ERROR: invalid pin number at getPin()');
@@ -149,4 +156,6 @@ ICConnection.prototype.getStatus = function() {
     return status;
 };
 
-module.exports = ICConnection;
+var iccon = new ICConnection();
+
+module.exports = iccon;

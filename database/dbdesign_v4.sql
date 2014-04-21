@@ -10,9 +10,13 @@ CREATE TABLE schedules (
 CREATE TABLE rules ( 
     id           INTEGER        PRIMARY KEY AUTOINCREMENT
                                 NOT NULL,
+    devices_id INTEGER REFERENCES devices ( id )
+                                NOT NULL,
     cron         VARCHAR( 50 )  NOT NULL,
     schedules_id INTEGER        NOT NULL
-                                REFERENCES schedules ( id ) 
+                                REFERENCES schedules ( id ) ,
+    onoff      BOOLEAN NOT NULL
+    
 );
 
 
@@ -24,13 +28,6 @@ CREATE TABLE devices (
     pinnumber INTEGER         NOT NULL 
 );
 
-
--- Table: devices_has_rules
-CREATE TABLE devices_has_rules ( 
-    devices_id INTEGER REFERENCES devices ( id ),
-    rules_id   INTEGER REFERENCES rules ( id ),
-    onoff      BOOLEAN NOT NULL 
-);
 
 
 -- Table: temperatures
