@@ -70,21 +70,6 @@ app.get('/pins/:nr/on', function(req, res) {
     res.end();
 });
 
-//show devices
-app.get('/devices', function(req, res){
-    db.getDb().all('select * from devices ', function(err, rows){
-         if (err) {
-            console.log(err);
-            res.status('500').send('db error');
-            res.end();
-            return;
-        }
-        res.send(rows);
-        res.end();
-    });
-
-});
-
 //gets the current temperature
 app.get('/temp', function(req, res) {
     fs.readFile('/sys/bus/w1/devices/10-000802aafc40/w1_slave', 'utf8', function(err, data) {
@@ -105,6 +90,20 @@ app.get('/temp', function(req, res) {
 app.get('/templog/:nr', function(req, res) {
     db.getDb().all('select * from temperatures order by time asc limit ?', req.params.nr, function(err, rows) {
         if (err) {
+            console.log(err);
+            res.status('500').send('db error');
+            res.end();
+            return;
+        }
+        res.send(rows);
+        res.end();
+    });
+});
+
+//show devices
+app.get('/devices', function(req, res){
+    db.getDb().all('select * from devices ', function(err, rows){
+         if (err) {
             console.log(err);
             res.status('500').send('db error');
             res.end();
@@ -138,8 +137,6 @@ app.delete('/devices', function(req, res) {
     res.json(true);
 });
 
-app.listen(8080);
-console.log('Server listening op port 8080');
 
 //update device
 app.put('/devices', function(req, res){
@@ -153,5 +150,9 @@ app.put('/devices', function(req, res){
     db.getDb().run('update devices set devices.name = ?, devices.pinnumber = ? where devices.id = ?', name, pinnumber, id);
     res.json(true);
 });
+
+
+app.listen(8080);
+console.log('Server listening op port 8080');
 
 

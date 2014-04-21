@@ -15,7 +15,7 @@ CREATE TABLE rules (
     cron         VARCHAR( 50 )  NOT NULL,
     schedules_id INTEGER        NOT NULL
                                 REFERENCES schedules ( id ) ,
-    onoff      BOOLEAN NOT NULL
+    onoff      BOOLEAN          NOT NULL
     
 );
 
@@ -25,10 +25,10 @@ CREATE TABLE devices (
     id        INTEGER         PRIMARY KEY AUTOINCREMENT
                               NOT NULL,
     name      VARCHAR( 100 )  NOT NULL,
-    pinnumber INTEGER         NOT NULL 
+    pin         INTEGER       NOT NULL
+                              UNIQUE
+
 );
-
-
 
 -- Table: temperatures
 CREATE TABLE temperatures ( 
