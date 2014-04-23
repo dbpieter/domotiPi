@@ -108,20 +108,6 @@ ICConnection.prototype.setPin = function(pinNumber, value) {
     }
 };
 
-ICConnection.prototype.allOff = function(){
-    this.sendToIC(OLATA,[0x0]);
-    this.sendToIC(OLATB,[0x0]);
-    this.setCurrentOLAT('A',0x0);
-    this.setCurrentOLAT('B',0x0);
-};
-
-ICConnection.prototype.allOn = function(){
-    this.sendToIC(OLATA,[0xFF]);
-    this.sendToIC(OLATB,[0xFF]);
-    this.setCurrentOLAT('A',0xFF);
-    this.setCurrentOLAT('B',0xFF);
-}
-
 ICConnection.prototype.getPin = function(pinNumber) {
     if (pinNumber < 0 || pinNumber > 16) {
         console.log('ERROR: invalid pin number at getPin()');
@@ -141,21 +127,12 @@ ICConnection.prototype.getPin = function(pinNumber) {
     }
 };
 
-ICConnection.prototype.isPinValid = function(pinNumber) {
-    if (pinNumber < 0 || pinNumber > 15) {
-        return false;
-    }
-    return true;
-};
+//var test = new ICConnection();
+//test.setPin(8, 1);
+//test.setPin(7, 1);
+//
+//for (var i = 0; i < 16; i++) {
+//    console.log(i + ':' + test.getPin(i) + '\n');
+//}
 
-ICConnection.prototype.getStatus = function() {
-    var status = new Array();
-    for (var i = 0; i < 16; i++) {
-        status[i] = {'pin':i,'enabled': this.getPin(i)};
-    }
-    return status;
-};
-
-var iccon = new ICConnection();
-
-module.exports = iccon;
+module.exports = ICConnection;
