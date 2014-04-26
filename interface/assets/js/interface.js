@@ -1,6 +1,9 @@
-var ipaddress = '10.129.17.17';
+var apiUrl = 'http://' + window.location.hostname + ':8080';
+var labels;
+var temps;
+var d;
 
-function addDevice(id, name, pin) {
+var addDevice = function(id, name, pin) {
   var html = '<div class="col-md-4">';
   html += '  <div class="device" data-id="' + id + '" data-pin="' + pin + '">';
   html += '    <div class="well well-sm">';
@@ -15,12 +18,15 @@ function addDevice(id, name, pin) {
   $('#devices > .row').prepend(html);
 }
 
-function initDevices() {
-  var link = "http://" + ipaddress + ":8080/devices";
+var initDevices = function() {
+  var link = apiUrl + '/devices';
+  console.log('Getting devices at ' + link);
   var jqxhr = $.ajax(link)
   .done(function(data) {
+    console.log('Yes, here are the devices!');
     for (var i = 0; i < data.length; i++) {
-      addDevice(data[i].id, data[i].name, data[i].pinnumber);
+      addDevice(data[i].id, data[i].name, data[i].pin);
+      console.log('Device added');
     }
     initSwitches();
   })
@@ -29,9 +35,10 @@ function initDevices() {
   })
 }
 
-function setInitState() {
-  var link = "http://" + ipaddress + ":8080/pins";
+var setInitState = function() {
+  var link = apiUrl + '/pins';
   var devices = $('.device');
+  console.log('Getting pin status');
   var jqxhr = $.ajax(link)
   .done(function(data) {
     $.each($(devices), function(index) {
@@ -43,14 +50,15 @@ function setInitState() {
         }
       }
     });
+    addEventHandlers();
   })
   .fail(function() {
       showError('Oops. Could not connect to hardware.');
   })
 }
 
-function turnPin(pin, state) {
-  var link = "http://" + ipaddress + ":8080/pins/" + pin + "/";
+var turnPin = function(pin, state) {
+  var link = apiUrl + '/pins/' + pin + '/';
   if (state) {
     link += "on";
   }
@@ -67,32 +75,34 @@ function turnPin(pin, state) {
   })
 }
 
-function turnSwitches(state) {
+var turnSwitches = function(state) {
   $.each($('.switch'), function(index) {
       $(this).bootstrapSwitch('state', state);
   });
 }
 
-function createAutoClosingAlert(selector, delay) {
+var createAutoClosingAlert = function(selector, delay) {
     var alert = $(selector).alert();
     window.setTimeout(function() {
         alert.alert('close')
     }, delay);
 }
 
-function showError(msg) {
+var showError = function(msg) {
     var error = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong><i class="glyphicon glyphicon-warning-sign"></i></strong> ' + msg + '</div>';
     $('#errors').append(error);
     createAutoClosingAlert('.alert', 5000);
 }
 
-function initSwitches() {
+var initSwitches = function() {
     // init all switches
     $('.switch').bootstrapSwitch();
     setInitState();
 }
 
-function addEventHandlers() {
+var addEventHandlers = function() {
+  console.log('Added event handlers');
+
   $('#turn-on-all-devices').on('click', function() {
       turnSwitches(true);
   });
@@ -107,27 +117,64 @@ function addEventHandlers() {
   });
 }
 
+var getChartData = function() {
+  var link = apiUrl + '/templog/20';
+  var jqxhr = $.ajax(link)
+  .done(function(data) {
+    d = data;
+    console.log('Temperature data is available');
+    generateTemperatureData();
+    createChart();
+  })
+  .fail(function() {
+    showError('Could not get temperature');
+  })
+}
 
-function createChart() {
+var generateTemperatureData = function() {
+    labels = new Array();
+    temps = new Array();
+    for (var i = 0; i < d.length; i++) {
+      temps.push(Math.round( parseFloat(d[i].temperature) * 10 ) / 10);
+      labels.push(d[i].time.substring(10));
+    }
+}
+
+var createChart = function() {
+    var options = {
+      scaleOverride : true,
+    	//** Required if scaleOverride is true **
+    	//Number - The number of steps in a hard coded scale
+    	scaleSteps : 10,
+    	//Number - The value jump in the hard coded scale
+    	scaleStepWidth : 3,
+    	//Number - The scale starting value
+    	scaleStartValue : 0,
+    }
+
     //Get context with jQuery - using jQuery's .get() method.
     var ctx = $("#temperature").get(0).getContext("2d");
     var data = {
-        labels: ["12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30"],
+        labels: labels,
         datasets: [
             {
                 fillColor: "rgba(151,187,205,0.5)",
                 strokeColor: "rgba(151,187,205,1)",
                 pointColor: "rgba(151,187,205,1)",
                 pointStrokeColor: "#fff",
-                data: [17, 18, 18, 16, 17, 20, 21]
+                data: temps
             }
         ]
     }
-    new Chart(ctx).Line(data);
+    new Chart(ctx).Line(data, options);
+}
+
+var addModalEvents = function() {
+  $('#modal').modal('toggle');
 }
 
 $(document).ready(function() {
     initDevices();
-    addEventHandlers();
-    createChart();
+    getChartData();
+    AddModalEvents();
 });
