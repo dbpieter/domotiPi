@@ -1,21 +1,12 @@
 var express = require('express');
+var scheduler = require('./scheduler.js');
+
 var app = express();
 
-var icc = require('./icconnection.js');
-var iccon = new icc();
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded()); // to support URL-encoded bodies
 
-app.get('/', function(req, res) {
-    res.type('text/plain');
-    res.send('welcome');
-});
+require('./routes.js')(app);
 
-app.get('/pins/:nr', function(req, res) {
-    iccon.setPin(req.params.nr, 1);
-});
-
-app.get('/temp/', function(req, res){
-
-});
-
-app.listen(80);
-console.log('Server listening op port 80');
+app.listen(8080);
+console.log('Server listening op port 8080');

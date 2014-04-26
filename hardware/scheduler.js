@@ -8,7 +8,7 @@ var icc = require('./icconnection.js');
 var jobs = new Array();
 
 //seconds start with */5 !!!
-var tempjob = new CronJob('* 1 * * * *', function() {
+var tempjob = new CronJob('* 5 * * * *', function() {
     fs.readFile('/sys/bus/w1/devices/10-000802aafc40/w1_slave', 'utf8', function(err, data) {
         if (err) {
             console.log(err);
