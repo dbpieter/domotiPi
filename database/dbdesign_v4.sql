@@ -51,6 +51,8 @@ CREATE TABLE users (
     id       INTEGER         PRIMARY KEY AUTOINCREMENT,
     name     VARCHAR( 100 )  NOT NULL,
     password VARCHAR( 100 )  NOT NULL,
-    email    VARCHAR( 100 )  NOT NULL
-                             UNIQUE 
+    email    VARCHAR( 100 )  NOT NULL UNIQUE,
+    updated_at DATETIME,
+    created_at DATETIME,
+    remember_token varchar(60)
 );
