@@ -24,7 +24,7 @@
         <div id="schedules">
           <div class="panel-group" id="accordion">
 
-            <div class="schedule">
+            <div class="schedule" data-schedule-id="1">
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
@@ -39,9 +39,9 @@
                     <div class="row">
                       <div class="col-md-12">
                         <ul class="rules">
-                          <li class="rule">
+                          <li class="rule" data-cron="0 7 * * 5" data-rule-id="1">
                             <div class="rule-description">
-                              Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                              Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" class="edit-rule"><i class="glyphicon glyphicon-pencil"></i></a>
                             </div>
                             <ul class="rule-devices">
                               <li class="rule-device">
@@ -55,9 +55,9 @@
                               </li>
                             </ul>
                           </li>
-                          <li class="rule">
+                          <li class="rule" data-cron="0 7 * * 5 " data-rule-id="1">
                             <div class="rule-description">
-                              Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
+                              Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" class="edit-rule"><i class="glyphicon glyphicon-pencil"></i></a>
                             </div>
                             <ul class="rule-devices">
                               <li class="rule-device">
@@ -238,7 +238,7 @@
     </div><!-- /.modal -->
 
     <!-- EDIT RULE MODAL -->
-    <div class="modal fade" id="editRule" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="editRuleModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -250,23 +250,7 @@
             <hr>
             <ul class="cron-devices">
               <li class="cron-device">
-                Kitchen lights:
-                <select class="cron-device-value">
-                  <option>ON</option>
-                  <option>OFF</option>
-                </select>
-                <a href="#" class="delete-cron-device pull-right"><i class="glyphicon glyphicon-remove"></i></a>
-              </li>
-              <li class="cron-device">
-                TV:
-                <select class="cron-device-value">
-                  <option>ON</option>
-                  <option>OFF</option>
-                </select>
-                <a href="#" class="delete-cron-device pull-right"><i class="glyphicon glyphicon-remove"></i></a>
-              </li>
-              <li class="cron-device">
-                Toilet light:
+                <span class="cron-device-name">Kitchen lights:</span>
                 <select class="cron-device-value">
                   <option>ON</option>
                   <option>OFF</option>
@@ -280,9 +264,7 @@
                 <div class="form-group">
                   <label for="select-cron-device">Choose a device</label>
                   <select class="form-control">
-                    <option>Kitchen lights</option>
-                    <option>TV</option>
-                    <option>Toilet light</option>
+                    <option>Available devices</option>
                   </select>
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm add-cron-device-btn">Add</button>
@@ -291,7 +273,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary btn-sm">Save</button>
+            <button id="btnEditRule" type="button" class="btn btn-primary btn-sm">Save</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -322,13 +304,13 @@
                     <option>Toilet light</option>
                   </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm add-cron-device-btn">Add</button>
+                <button id="btnAddCronDeviceNewRule" type="submit" class="btn btn-primary btn-sm add-cron-device-btn">Add</button>
               </form>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary btn-sm">Save</button>
+            <button id="btnSaveRule" type="button" class="btn btn-primary btn-sm">Save</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -338,5 +320,6 @@
 @stop
 
 @section('js')
-<script src="assets/js/interface.js"></script>
+<script src="assets/js/jquery-cron.js"></script>
+<script src="assets/js/schedules.js"></script>
 @stop

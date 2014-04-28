@@ -6,7 +6,7 @@
     <!-- the errors will show here -->
     <div id="errors"></div>
     <!-- end errors -->
-    
+
     <div class="row">
 
       <div class="col-md-3">
@@ -81,5 +81,5 @@
 @stop
 
 @section('js')
-<script src="assets/js/interface.js"></script>
+
 @stop

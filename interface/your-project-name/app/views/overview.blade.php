@@ -110,5 +110,6 @@
 
 @section('js')
 <script src="assets/js/Chart.min.js"></script>
-<script src="assets/js/interface.js"></script>
+<script src="assets/js/overview.js"></script>
+<script src="assets/js/temperature.js"></script>
 @stop
