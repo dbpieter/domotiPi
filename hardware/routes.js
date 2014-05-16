@@ -206,19 +206,23 @@ module.exports = function(app) {
     });
 
     //Delete device
-    app.delete('/devices', function(req, res) {
+    app.post('/devices/delete', function(req, res) {
         var id = req.param('id');
         if (id === null) {
             res.statusCode = 400;
             return res.send('Error 400: delete syntax incorrect.');
         }
-        db.getDb().run('delete from devices where devices.id = ?', id);
+        db.getDb().run('delete from devices where devices.id = ?', id, function(error) {
+            console.log(error);
+            err = true;
+        });
+
         res.json(true);
     });
 
 
     //Update device
-    app.put('/devices', function(req, res) {
+    app.post('/devices/update', function(req, res) {
         var id = req.param('id');
         var name = req.param('name');
         var pinnumber = req.param('pin');
