@@ -156,6 +156,9 @@ ICConnection.prototype.getPin = function(pinNumber) {
 };
 
 ICConnection.prototype.isPinValid = function(pinNumber) {
+    if(isNaN(pinNumber)){
+        return false;
+    }
     if (pinNumber < 0 || pinNumber > 15) {
         return false;
     }

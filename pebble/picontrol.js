@@ -16,7 +16,7 @@
 
 var appTitle = 'PiControl';
 var status = false;
-var apiUrl = 'http://10.129.17.17:8080'; // apiUrl - change ip address! :-)
+var apiUrl = 'http://192.168.0.164:8080'; // apiUrl - change ip address! :-)
 var pins = new Array(); // pin status
 var index = 0;
 var min = 0;

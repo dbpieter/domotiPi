@@ -23,8 +23,9 @@ var tempjob = new CronJob('* 5 * * * *', function() {
 }, true);
 
 function loadSchedules(scheduleID) {
-    db.getDb().all('select * from rules inner join schedules on schedules.id = rules.schedules_id inner join devices on devices.id = rules.devices_id where schedules.enabled = \'true\';', function(err, rows) {
+    db.getDb().all('select * from rules inner join schedules on schedules.id = rules.schedules_id inner join devices on devices.id = rules.devices_id where schedules.enabled = \'true\' ;', function(err, rows) {
         for (var i = 0; i < rows.length; i++) {
+            console.log(rows[i]);
             newJob(rows[i]);
         }
     });
@@ -42,26 +43,37 @@ function newJob(row) {
             icc.setPin(row['pin'], 0);
         }
     }, function() {
-        console.log('job ' + row[id] + 'terminated');
+        console.log('job ' + row['id'] + 'terminated');
     }, true);
     jobs.push({'job': job, 'info': row});
     job.start();
+    console.log('jobs');
 }
 
 loadSchedules();
 
 /*
- * 
+ *  terminates one job
  */
 function terminateJob(jobId) {
-
+    for (var i = 0; i < jobs.length; i++) {
+        if (jobs['info']['id'] === jobId) {
+            jobs['job'].stop();
+            jobs.splice(i, 1);
+        }
+    }
 }
 
 /*
- * terminates the current schedule
+ * terminates all jobs in a schedule
  */
-function terminateSchedule(schedule) {
-
+function terminateSchedule(scheduleId) {
+    for (var i = 0; i < jobs.length; i++) {
+        if (jobs['info']['schedule_id'] === scheduleId) {
+            jobs['job'].stop();
+            jobs.splice(i,1);
+        }
+    }
 }
 
 /*
@@ -74,19 +86,15 @@ function refreshSchedule() {
 }
 
 /*
- * gets called when a schedule is removed from the db
- */
-function scheduleRemoved(scheduleID) {
-    for (var i = 0; i < jobs.length; i++) {
-        if(jobs[i]['info'])
-    }
-}
-
-/*
  * gets called when a rule is added to a schedule
  */
-function ruleAdded(scheduleID) {
-    
+function ruleAdded(ruleId) {
+	console.log(ruleId);
+    db.getDb().all('select * from rules inner join schedules on schedules.id = rules.schedules_id inner join devices on devices.id = rules.devices_id where schedules.enabled = \'true\' and rules.id = ?;',ruleId, function(err, rows) {
+			console.log(rows[0]);		
+            console.log(rows);
+            newJob(rows[0]);
+        });
 }
 
 
@@ -94,8 +102,8 @@ function newSchedule(scheduleID) {
 
 }
 
-function ruleUpdated(scheduleID,ruleID){
-    
+function ruleUpdated(scheduleID, ruleID) {
+
 }
 
 function isScheduleRunning(scheduleID) {
@@ -107,13 +115,6 @@ function isScheduleRunning(scheduleID) {
     return false;
 }
 
-module.exports.scheduleRemoved = scheduleRemoved;
+module.exports.terminateSchedule = terminateSchedule
 module.exports.ruleAdded = ruleAdded;
 module.exports.ruleUpdated = ruleUpdated;
-
-
-
-
-
-
-
