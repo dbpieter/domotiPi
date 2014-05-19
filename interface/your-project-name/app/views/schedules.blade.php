@@ -14,7 +14,7 @@
           <ul class="list-group">
             <li class="list-group-item"><a id="enable-all-schedules" href="#">Enable all schedules</a></li>
             <li class="list-group-item"><a id="disable-all-schedules" href="#">Disable all schedules</a></li>
-            <li class="list-group-item"><a href="#" data-toggle="modal" data-target="#addSchema"><i class="glyphicon glyphicon-plus"></i> Add a schedule</a></li>
+            <li class="list-group-item"><a href="#" data-toggle="modal" data-target="#addSchedule"><i class="glyphicon glyphicon-plus"></i> Add a schedule</a></li>
           </ul>
         </div>
         <!-- end tools -->
@@ -22,189 +22,7 @@
       <!-- start schemas -->
       <div class="col-md-9">
         <div id="schedules">
-          <div class="panel-group" id="accordion">
-
-            <div class="schedule" data-schedule-id="1">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <input type="checkbox" class="schedule-enable" checked />
-                    <a class="schedule-title" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                      Workweek
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse in">
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <ul class="rules">
-                          <li class="rule" data-cron="0 7 * * 5" data-rule-id="1">
-                            <div class="rule-description">
-                              Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" class="edit-rule"><i class="glyphicon glyphicon-pencil"></i></a>
-                            </div>
-                            <ul class="rule-devices">
-                              <li class="rule-device">
-                                Kitchen lights: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                TV: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                Toilet light: <strong>OFF</strong>
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="rule" data-cron="0 7 * * 5 " data-rule-id="1">
-                            <div class="rule-description">
-                              Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" class="edit-rule"><i class="glyphicon glyphicon-pencil"></i></a>
-                            </div>
-                            <ul class="rule-devices">
-                              <li class="rule-device">
-                                Kitchen lights: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                TV: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                Toilet light: <strong>OFF</strong>
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <div class="add-rule">
-                              <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="schedule">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <input type="checkbox" class="schedule-enable" />
-                    <a class="schedule-title" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                      Vacation
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <ul class="rules">
-                          <li class="rule">
-                            <div class="rule-description">
-                              Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
-                            </div>
-                            <ul class="rule-devices">
-                              <li class="rule-device">
-                                Kitchen lights: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                TV: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                Toilet light: <strong>OFF</strong>
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="rule">
-                            <div class="rule-description">
-                              Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
-                            </div>
-                            <ul class="rule-devices">
-                              <li class="rule-device">
-                                Kitchen lights: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                TV: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                Toilet light: <strong>OFF</strong>
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <div class="add-rule">
-                              <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="schedule">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <input type="checkbox" class="schedule-enable" />
-                    <a class="schedule-title" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                      Another schedule
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapse3" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <ul class="rules">
-                          <li class="rule">
-                            <div class="rule-description">
-                              Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
-                            </div>
-                            <ul class="rule-devices">
-                              <li class="rule-device">
-                                Kitchen lights: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                TV: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                Toilet light: <strong>OFF</strong>
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="rule">
-                            <div class="rule-description">
-                              Every <strong>week</strong> on <strong>friday</strong> at <strong>07:00</strong> <a href="#" data-toggle="modal" data-target="#editRule"><i class="glyphicon glyphicon-pencil"></i></a>
-                            </div>
-                            <ul class="rule-devices">
-                              <li class="rule-device">
-                                Kitchen lights: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                TV: <strong>ON</strong>
-                              </li>
-                              <li class="rule-device">
-                                Toilet light: <strong>OFF</strong>
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <div class="add-rule">
-                              <a href="#" data-toggle="modal" data-target="#new-rule">Add a rule</a>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
+          <div class="panel-group" id="accordion"></div>
         </div>
       </div>
       <!-- end schemas -->
@@ -214,7 +32,7 @@
   <div id="dialogs">
 
     <!-- ADD NEW SCHEDULE MODAL -->
-    <div class="modal fade" id="addSchema" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="addSchedule" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -224,14 +42,14 @@
           <div class="modal-body">
             <form role="form">
               <div class="form-group">
-                <label for="nameSchema">Name: </label>
-                <input type="text" class="form-control" id="nameSchema" placeholder="Workweek, vacation, ...">
+                <label for="nameSchedule">Name: </label>
+                <input type="text" class="form-control" id="nameSchedule" placeholder="Workweek, vacation, ...">
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Annuleren</button>
-            <button type="button" class="btn btn-primary btn-sm">Voeg schema toe</button>
+            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary btn-sm" id="btnAddSchedule">Add schedule</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -246,31 +64,22 @@
             <h4 class="modal-title">Edit rule</h4>
           </div>
           <div class="modal-body">
-            <div class="cron"></div>
-            <hr>
-            <ul class="cron-devices">
-              <li class="cron-device">
-                <span class="cron-device-name">Kitchen lights:</span>
-                <select class="cron-device-value">
-                  <option>ON</option>
-                  <option>OFF</option>
+            <form> 
+              <div class="form-group">
+                <div class="cron"></div>
+              </div>
+              <div class="form-group">
+                <label for="select-cron-device">Choose a device</label>
+                <select id="select-cron-device" name="select-cron-device" class="form-control"></select>
+              </div>
+              <div class="form-group">
+                <label for="select-cron-device-value">ON or OFF?</label>
+                <select id="select-cron-device-value" name="select-cron-device-value" class="form-control">
+                  <option value="1">ON</option>
+                  <option value="0">OFF</option>
                 </select>
-                <a href="#" class="delete-cron-device pull-right"><i class="glyphicon glyphicon-remove"></i></a>
-              </li>
-            </ul>
-            <hr>
-            <div class="add-cron-device">
-              <form role="form">
-                <div class="form-group">
-                  <label for="select-cron-device">Choose a device</label>
-                  <select class="form-control">
-                    <option>Available devices</option>
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-primary btn-sm add-cron-device-btn">Add</button>
-              </form>
-            </div>
-          </div>
+              </div>
+            </form>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
             <button id="btnEditRule" type="button" class="btn btn-primary btn-sm">Save</button>
@@ -280,7 +89,7 @@
     </div><!-- /.modal -->
 
     <!-- NEW RULE MODAL -->
-    <div class="modal fade" id="new-rule" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="new-rule-modal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -288,25 +97,22 @@
             <h4 class="modal-title">New rule for &lt;name of schedule&gt;</h4>
           </div>
           <div class="modal-body">
-            <div class="cron"></div>
-            <hr>
-            <ul class="cron-devices">
-              No devices yet. Add a device!
-            </ul>
-            <hr>
-            <div class="add-cron-device">
-              <form role="form">
-                <div class="form-group">
-                  <label for="select-cron-device">Choose a device</label>
-                  <select class="form-control">
-                    <option>Kitchen lights</option>
-                    <option>TV</option>
-                    <option>Toilet light</option>
-                  </select>
-                </div>
-                <button id="btnAddCronDeviceNewRule" type="submit" class="btn btn-primary btn-sm add-cron-device-btn">Add</button>
-              </form>
-            </div>
+            <form> 
+              <div class="form-group">
+                <div class="cron"></div>
+              </div>
+              <div class="form-group">
+                <label for="select-cron-device">Choose a device</label>
+                <select id="select-cron-device" name="select-cron-device" class="form-control"></select>
+              </div>
+              <div class="form-group">
+                <label for="select-cron-device-value">ON or OFF?</label>
+                <select id="select-cron-device-value" name="select-cron-device-value" class="form-control">
+                  <option value="1">ON</option>
+                  <option value="0">OFF</option>
+                </select>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
@@ -321,5 +127,9 @@
 
 @section('js')
 <script src="assets/js/jquery-cron.js"></script>
+<script src="assets/js/moment.min.js" type="text/javascript"></script>
+<script src="assets/js/later.min.js" type="text/javascript"></script>
+<script src="assets/js/cron.js" type="text/javascript"></script>
+<script src="assets/js/prettycron.js" type="text/javascript"></script>
 <script src="assets/js/schedules.js"></script>
 @stop

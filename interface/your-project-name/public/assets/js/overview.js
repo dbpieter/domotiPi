@@ -1,4 +1,4 @@
-var apiUrl = 'http://' + window.location.hostname + ':8080';
+var apiUrl = 'http://' + '192.168.0.163' + ':8080';
 
 var addDevice = function(id, name, pin) {
   var html = '<div class="col-md-4">';
@@ -7,7 +7,7 @@ var addDevice = function(id, name, pin) {
   html += '      <h4 class="title">' + name + '</h4>';
   html += '      <input class="switch" type="checkbox" /><br>';
   html += '      <p class="edit">';
-  html += '        <a href="#" data-toggle="modal" data-target="#deviceSettings">Modify</a>';
+  html += '        <a href="#">Modify</a>';
   html += '      </p>';
   html += '    </div>';
   html += '  </div>';
@@ -97,20 +97,120 @@ var initSwitches = function() {
     setInitState();
 }
 
+var getAvailablePins = function() {
+  var link = apiUrl + '/pins/available';
+  var jqxhr = $.ajax(link)
+  .done(function(data) {
+    var available = data;
+    var select = $('#addDevice #selectGPIO');
+    $(select).html("");
+    for (var i = 0; i < available.length; i++) {
+      if (available[i] != null) {
+        $(select).append($("<option></option>").attr("value", available[i]['pin']).text("Pin " + available[i]['pin']));
+      }
+    };
+  })
+  .fail(function() {
+    showError('Oops. Could not connect to hardware.');
+  })
+}
+
+var getDevice = function(pin) {
+  var link = apiUrl + '/devices';
+  var response = $.parseJSON($.ajax({
+    type: "GET",
+    url: link,
+    async: false
+  }).responseText);
+  for (var i = 0; i < response.length; i++) {
+    if (response[i]['pin'] == pin) {
+      return response[i];
+    }
+  };
+  return -1;
+}
+
+var saveDevice = function(name, pin) {
+  var link = apiUrl + '/devices' + '?pin=' + pin + '&name=' + name;
+  var jqxhr = $.post(link)
+  .done(function(data) {
+    var device = getDevice(pin);
+    addDevice(device['id'], name, pin);
+    $('.device[data-pin=' + pin + '] .switch').bootstrapSwitch('state', false);
+    $('#addDevice').modal('hide');
+  })
+  .fail(function() {
+    showError('Oops. Could not connect to hardware.');
+  })
+}
+
+var deleteDevice = function(deviceId) {
+  $('.device[data-id=' + deviceId + ']').parent().remove();
+}
+
 var addEventHandlers = function() {
   console.log('Added event handlers');
 
   $('#turn-on-all-devices').on('click', function() {
-      turnSwitches(true);
+    turnSwitches(true);
   });
 
   $('#turn-off-all-devices').on('click', function() {
-      turnSwitches(false);
+    turnSwitches(false);
   });
 
   $('.switch').on('switchChange.bootstrapSwitch', function(event, state) {
     var pin = $(this).parent().parent().parent().parent().attr('data-pin')[0];
     turnPin(pin, state);
+  });
+
+  $('#addDevice').on('shown.bs.modal', function() {
+    getAvailablePins();
+  });
+
+  $('#btnAddDevice').on('click', function() {
+    var pin = $('#addDevice #selectGPIO').val();
+    var name = $('#addDevice #nameDevice').val();
+    saveDevice(name, pin);
+  });
+
+  $('#deviceSettings #btnDeviceDelete').on('click', function() {
+    var deviceId = $(this).attr('data-id');
+    $.ajax({
+      url: apiUrl + '/devices/delete?id=' + deviceId,
+      type: 'POST',
+      success: function(result) {
+        deleteDevice(deviceId);
+        console.log(result);
+        $('#deviceSettings').modal('hide');
+      }
+    });
+  });
+
+  $('#deviceSettings #btnModifyDevice').on('click', function() {
+    var id = $('#deviceSettings #btnDeviceDelete').attr('data-id');
+    var name = $('#deviceSettings #naamApparaat').val();
+    var pin = $('#deviceSettings #btnDeviceDelete').attr('data-pin');
+    $.ajax({
+      url: apiUrl + '/devices/update?id=' + id + '&name=' + name + '&pin=' + pin,
+      type: 'POST',
+      success: function(result) {
+        $('#deviceSettings').modal('hide');
+        $('.device[data-id=' + id + ']').find('.title').html(name);
+      }
+    });
+  });
+
+  $('.edit a').on('click', function() {
+    var device = $(this).parent().parent().parent();
+    var title = $(device).find('.title').html();
+    var pin = $(device).attr('data-pin');
+    var id = $(device).attr('data-id');
+    $('#connectedPin').html(pin);
+    $('#btnDeviceDelete').attr('data-pin', pin);
+    $('#btnDeviceDelete').attr('data-id', id);
+    $('#deviceSettings').find('#naamApparaat').val(title);
+    $('#deviceSettings').modal('show');
   });
 }
 

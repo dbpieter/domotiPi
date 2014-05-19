@@ -1,4 +1,4 @@
-var apiUrl = 'http://' + window.location.hostname + ':8080';
+var apiUrl = 'http://' + '192.168.0.163' + ':8080';
 var labels;
 var temps;
 var d;
@@ -22,7 +22,7 @@ var generateTemperatureData = function() {
     temps = new Array();
     for (var i = 0; i < d.length; i++) {
       temps.push(Math.round( parseFloat(d[i].temperature) * 10 ) / 10);
-      labels.push(d[i].time.substring(10));
+      labels.push(d[i].time.substring(10).substring(0,5));
     }
 }
 
@@ -31,11 +31,11 @@ var createChart = function() {
       scaleOverride : true,
       //** Required if scaleOverride is true **
       //Number - The number of steps in a hard coded scale
-      scaleSteps : 10,
+      scaleSteps : 7,
       //Number - The value jump in the hard coded scale
-      scaleStepWidth : 3,
+      scaleStepWidth : 2,
       //Number - The scale starting value
-      scaleStartValue : 0,
+      scaleStartValue : 16,
     }
 
     //Get context with jQuery - using jQuery's .get() method.
@@ -55,6 +55,30 @@ var createChart = function() {
     new Chart(ctx).Line(data, options);
 }
 
+var addTempWidget = function(temp) {
+  var html = '<div class="col-md-4">';
+  html += '  <div class="tempature-widget">';
+  html += '    <div class="well well-sm">';
+  html += '      <h4 class="title">Current temperature</h4>';
+  html += '      <p class="lead temp">' + Math.round( temp * 10 ) / 10 + '&deg;C</p>'
+  html += '    </div>';
+  html += '  </div>';
+  html += '</div>';
+  $('#devices > .row').prepend(html);
+}
+
+var getCurrentTemp = function() {
+  var link = apiUrl + '/temp';
+  var jqxhr = $.ajax(link)
+  .done(function(data) {
+    addTempWidget(data);
+  })
+  .fail(function() {
+    showError('Could not get temperature');
+  })
+}
+
 $(document).ready(function() {
     getChartData();
+    getCurrentTemp();
 });

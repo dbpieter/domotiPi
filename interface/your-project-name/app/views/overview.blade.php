@@ -43,7 +43,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Kitchen lights</h4>
+                <h4 class="modal-title">Edit device</h4>
               </div>
               <div class="modal-body">
                 <form role="form">
@@ -53,13 +53,13 @@
                   </div>
                 </form>
                 <p>
-                  <i class="glyphicon glyphicon-info-sign"></i> Connected to GPIO 1.
+                  <i class="glyphicon glyphicon-info-sign"></i> Connected to PIN <span id="connectedPin"></span>.
                 </p>
-                <button class="btn btn-danger btn-xs">Delete</button>
+                <button class="btn btn-danger btn-xs" id="btnDeviceDelete">Delete</button>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary btn-sm">Save</button>
+                <button id="btnModifyDevice" type="button" class="btn btn-primary btn-sm">Save</button>
               </div>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
@@ -75,21 +75,10 @@
               <div class="modal-body">
                 <form role="form">
                   <div class="form-group">
-                    <label for="naamApparaatt">Name: </label>
-                    <input type="text" class="form-control" id="naamApparaatt" placeholder="Kitchen lights">
+                    <label for="naamApparaat">Name: </label>
+                    <input type="text" class="form-control" id="nameDevice" placeholder="Kitchen lights">
                   </div>
-                  <select class="form-control">
-                    <option>GPIO 1</option>
-                    <option>GPIO 2</option>
-                    <option>GPIO 3</option>
-                    <option>GPIO 4</option>
-                    <option>GPIO 5</option>
-                    <option>GPIO 6</option>
-                    <option>GPIO 7</option>
-                    <option>GPIO 8</option>
-                    <option>GPIO 9</option>
-                    <option>GPIO 10</option>
-                  </select>
+                  <select id="selectGPIO" class="form-control"></select>
                 </form>
               </div>
               <div class="modal-footer">
