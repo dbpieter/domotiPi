@@ -401,23 +401,25 @@ module.exports = function(app) {
                     err = true;
                 }
                 if(!err) {
-                scheduler.ruleAdded(rows[0]['max(id)']);
+                    scheduler.ruleAdded(rows[0]['max(id)']);
+                    res.json(rows[0]['max(id)']);    
                 }           
             });
         }
-        
-        res.json(err);
+        else {
+            res.json(err);
+        }
     });
 
     //Update rules from specific schedule
-    app.put('/rules', function(req, res) {
+    app.post('/rules/update', function(req, res) {
         var err = false;
         var id = req.param('id');
         var devices_id = req.param('devices_id');
         var cron = req.param('cron');
         var schedules_id = req.param('schedules_id');
         var onoff = req.param('onoff');
-        if (id === null || name === null || enabled === null) {
+        if (id === null || devices_id === null || cron === null || schedules_id === null || onoff === null) {
             res.statusCode = 400;
             return res.send('Error 400: update syntax incorrect.');
         }

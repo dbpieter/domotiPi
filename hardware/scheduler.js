@@ -88,7 +88,7 @@ function enableSchedule(scheduleId) {
  */
 function ruleAdded(ruleId) {
     console.log(ruleId);
-    db.getDb().all('select * from rules inner join schedules on schedules.id = rules.schedules_id inner join devices on devices.id = rules.devices_id where schedules.enabled = \'true\' and rules.id = ?;', ruleId, function(err, rows) {
+    db.getDb().all('select * from rules inner join schedules on schedules.id = rules.schedules_id inner join devices on devices.id = rules.devices_id where rules.id = ?;', ruleId, function(err, rows) {
         console.log(rows[0]);
         console.log(rows);
         newJob(rows[0]);
