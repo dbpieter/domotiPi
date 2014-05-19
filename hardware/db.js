@@ -19,5 +19,10 @@ var getDb = function(){
     return db;
 };
 
+var log = function(message){
+    db.run('insert into logs (message,time) values (?,?)',message,currentDateTime());
+}
+
 module.exports.logTemp = logTemp;
 module.exports.getDb = getDb;
+module.exports.log = log;

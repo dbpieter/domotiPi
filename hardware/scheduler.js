@@ -55,8 +55,8 @@ loadSchedules();
 /*
  *  terminates one job
  */
-function terminateJob(jobId) {
-    for (var i = 0; i < jobs.length; i++) {
+function terminateRule(jobId) {
+    for (var i = jobs.length - 1; i >= 0; i--) {
         if (jobs['info']['id'] === jobId) {
             jobs['job'].stop();
             jobs.splice(i, 1);
@@ -67,43 +67,32 @@ function terminateJob(jobId) {
 /*
  * terminates all jobs in a schedule
  */
-function terminateSchedule(scheduleId) {
-    for (var i = 0; i < jobs.length; i++) {
+function disableSchedule(scheduleId) {
+    for (var i = jobs.length - 1; i >= 0; i--) {
         if (jobs['info']['schedule_id'] === scheduleId) {
             jobs['job'].stop();
-            jobs.splice(i,1);
+            jobs.splice(i, 1);
         }
     }
 }
 
 /*
- * checks if all the jobs in the current schedule still exist and if new ones have been created
- * changes are made to the running jobs array (new jobs started and deleted ones terminated)
+ * enables all jobs from a schedule
  */
-function refreshSchedule() {
-    jobs = new Array();
-    loadSchedules();
+function enableSchedule(scheduleId) {
+    loadSchedules(scheduleId);
 }
 
 /*
  * gets called when a rule is added to a schedule
  */
 function ruleAdded(ruleId) {
-	console.log(ruleId);
-    db.getDb().all('select * from rules inner join schedules on schedules.id = rules.schedules_id inner join devices on devices.id = rules.devices_id where schedules.enabled = \'true\' and rules.id = ?;',ruleId, function(err, rows) {
-			console.log(rows[0]);		
-            console.log(rows);
-            newJob(rows[0]);
-        });
-}
-
-
-function newSchedule(scheduleID) {
-
-}
-
-function ruleUpdated(scheduleID, ruleID) {
-
+    console.log(ruleId);
+    db.getDb().all('select * from rules inner join schedules on schedules.id = rules.schedules_id inner join devices on devices.id = rules.devices_id where schedules.enabled = \'true\' and rules.id = ?;', ruleId, function(err, rows) {
+        console.log(rows[0]);
+        console.log(rows);
+        newJob(rows[0]);
+    });
 }
 
 function isScheduleRunning(scheduleID) {
@@ -115,6 +104,17 @@ function isScheduleRunning(scheduleID) {
     return false;
 }
 
-module.exports.terminateSchedule = terminateSchedule
-module.exports.ruleAdded = ruleAdded;
-module.exports.ruleUpdated = ruleUpdated;
+/*
+ * first remove it than reload it
+ */
+function ruleUpdated(ruleId){
+    console.log('rule updated')
+    terminateRule(ruleId);
+    ruleAdded(ruleId);
+}
+
+module.exports.ruleAdded        = ruleAdded;
+module.exports.ruleUpdated      = ruleUpdated;
+module.exports.terminateRule    = terminateRule;
+module.exports.enableSchedule   = enableSchedule;
+module.exports.disableSchedule  = disableSchedule;
