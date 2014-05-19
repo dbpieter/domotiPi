@@ -137,6 +137,21 @@ var saveDevice = function(name, pin) {
     var device = getDevice(pin);
     addDevice(device['id'], name, pin);
     $('.device[data-pin=' + pin + '] .switch').bootstrapSwitch('state', false);
+    $('.device[data-pin=' + pin + '] .switch').on('switchChange.bootstrapSwitch', function(event, state) {
+      var pin = $(this).parent().parent().parent().parent().attr('data-pin')[0];
+      turnPin(pin, state);
+    });
+    $('.device[data-pin=' + pin + '] .edit a').on('click', function() {
+      var device = $(this).parent().parent().parent();
+      var title = $(device).find('.title').html();
+      var pin = $(device).attr('data-pin');
+      var id = $(device).attr('data-id');
+      $('#connectedPin').html(pin);
+      $('#btnDeviceDelete').attr('data-pin', pin);
+      $('#btnDeviceDelete').attr('data-id', id);
+      $('#deviceSettings').find('#naamApparaat').val(title);
+      $('#deviceSettings').modal('show');
+    });
     $('#addDevice').modal('hide');
   })
   .fail(function() {
@@ -171,7 +186,13 @@ var addEventHandlers = function() {
   $('#btnAddDevice').on('click', function() {
     var pin = $('#addDevice #selectGPIO').val();
     var name = $('#addDevice #nameDevice').val();
-    saveDevice(name, pin);
+    if (name != '') {
+      saveDevice(name, pin);
+    }
+    else {
+      $('#addDevice #nameDevice').parent().addClass('has-error');
+      $('#addDevice #nameDevice').parent().find('.new-device-errors').html('Provide a name for the new device.');
+    }
   });
 
   $('#deviceSettings #btnDeviceDelete').on('click', function() {
@@ -211,6 +232,11 @@ var addEventHandlers = function() {
     $('#btnDeviceDelete').attr('data-id', id);
     $('#deviceSettings').find('#naamApparaat').val(title);
     $('#deviceSettings').modal('show');
+  });
+
+  $('#open-new-device-modal').on('click', function() {
+    $('#addDevice #nameDevice').parent().removeClass('has-error');
+    $('#addDevice #nameDevice').parent().find('.new-device-errors').html('');
   });
 }
 
