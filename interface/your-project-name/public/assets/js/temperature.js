@@ -1,4 +1,4 @@
-var apiUrl = 'http://' + '192.168.0.163' + ':8080';
+var apiUrl = 'http://' + location.host + ':8080';
 var labels;
 var temps;
 var d;

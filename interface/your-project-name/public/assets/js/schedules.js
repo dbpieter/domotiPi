@@ -1,5 +1,5 @@
 var port = '8080';
-var ipaddress = '192.168.0.163';
+var ipaddress = location.host;
 var apiUrl = 'http://' + ipaddress + ':' + port;
 
 var init = function() {
@@ -40,6 +40,7 @@ var addScheduleToPage = function(id) {
       $.each(result, function() {
         if (this['id'] == id) {
           addScheduleHTML(id, this['name'], this['enabled']);
+          
         }
       });
     }
@@ -64,7 +65,7 @@ var addScheduleHTML = function(id, name, enabled) {
   html += '    <div class="panel panel-default">';
   html += '      <div class="panel-heading">';
   html += '        <h4 class="panel-title">';
-  html += '          <input type="checkbox" class="schedule-enable" ' + (enabled ? 'checked=checked' : '')  + ' />';
+  html += '          <input type="checkbox" class="schedule-enable" ' + (enabled == 'true' ? 'checked' : '') + ' />';
   html += '          <a class="schedule-title" data-toggle="collapse" data-parent="#accordion" href="#collapse' + id + '">';
   html += name;
   html += '          </a>';
@@ -122,6 +123,7 @@ var editRule = function(rules_id, schedules_id, devices_id, cron, onoff) {
       rule.find('.rule-device-value').html(onoff ? 'ON' : 'OFF');
       rule.attr('data-cron', cron);
       rule.attr('data-devices-id', devices_id);
+      rule.find('.rule-cron').html(prettyCron.toString(cron, true));
     }
   });
 }
@@ -129,8 +131,7 @@ var editRule = function(rules_id, schedules_id, devices_id, cron, onoff) {
 var addRuleHTML = function(schedules_id, devices_id, rules_id, cron, onoff, name) {
   var onoffs = (onoff == 'true' ? 'ON' : 'OFF');
   var html = '<li class="rule" data-id="' + rules_id + '" data-cron="' + cron  + '" data-onoff="' + onoff + '" data-devices-id="' + devices_id + '">';
-  html +=  '  <div class="rule-description">';
-  html +=  prettyCron.toString(cron, true);
+  html +=  '  <div class="rule-description"><span class="rule-cron">' + prettyCron.toString(cron, true) + '</span>';
   html +=  '    / Device: <strong><span class="rule-device-name">' + name + '</span></strong>: <span class="rule-device-value">' + onoffs + '</span> <a href="#" class="edit-rule-link"><i class="glyphicon glyphicon-pencil"></i></a>';
   html +=  '  </div>';
   html +=  '</li>';
@@ -145,6 +146,17 @@ var getDevices = function() {
     async: false
   }).responseText);
   return response;
+}
+
+var enableSchedule = function(schedules_id, enabled) {
+  var link = apiUrl + '/schedules/enabled?schedule_id=' + schedules_id + '&enabled=' + enabled;
+  $.ajax({
+    url : link,
+    type: 'POST',
+    success: function(result) {
+      console.log('enabled or disabled schedule');
+    }
+  });
 }
 
 var addEventHandlers = function() {
@@ -218,6 +230,13 @@ var addEventHandlers = function() {
     var cron = '0 ' + $('#new-rule-modal .cron').cron('value');
     var onoff = $('#select-cron-device-value-new-rule').val() == 1 ? true : false;
     addRule(schedules_id, devices_id, cron, onoff);
+  });
+
+  $('.schedule-enable').on('click', function() {
+    var schedules_id = $(this).parent().parent().parent().parent().attr('data-id');
+    var enabled = $(this).prop('checked');
+    enableSchedule(schedules_id, enabled);
+    console.log('enableSchedule:' + schedules_id)
   });
 
 }

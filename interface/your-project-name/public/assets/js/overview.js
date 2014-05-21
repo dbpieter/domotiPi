@@ -1,4 +1,4 @@
-var apiUrl = 'http://' + '192.168.0.163' + ':8080';
+var apiUrl = 'http://' + location.host + ':8080';
 
 var addDevice = function(id, name, pin) {
   var html = '<div class="col-md-4">';
