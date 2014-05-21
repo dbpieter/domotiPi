@@ -20,7 +20,7 @@ public class MainActivity extends ActionBarActivity {
         
         myWebView = (WebView) findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.loadUrl("http://192.168.0.163/your-project-name/public/");
+        myWebView.loadUrl("http://10.129.21.44/your-project-name/public/");
         myWebView.setWebViewClient(new WebViewClients());
     }
     

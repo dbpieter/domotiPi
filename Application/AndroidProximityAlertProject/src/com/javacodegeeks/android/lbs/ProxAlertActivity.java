@@ -125,12 +125,12 @@ public class ProxAlertActivity extends Activity {
     		Toast.makeText(ProxAlertActivity.this, 
     				"Distance from Point:"+distance, Toast.LENGTH_LONG).show();
     		
-    	  	if(distance < 4 && !inArea){
+    	  	if(distance < 1 && !inArea){
     	  		inArea = true;
     	  		outArea = false;
     	   		
     	   		    DefaultHttpClient httpClient = new DefaultHttpClient();
-    	   		    HttpGet httpGet = new HttpGet("http://192.168.0.163:8080/pins/allon");
+    	   		    HttpGet httpGet = new HttpGet("http://10.129.21.44:8080/pins/allon");
     	   		    HttpResponse httpResponse = null;
 					try {
 						httpResponse = httpClient.execute(httpGet);
@@ -145,12 +145,12 @@ public class ProxAlertActivity extends Activity {
 					}	
 					return;
     	  	}
-    	  	else if(distance > 4 && !outArea){
+    	  	else if(distance > 1 && !outArea){
     	  		inArea = false;
     	  		outArea = true;
     	   		
 	   		    DefaultHttpClient httpClient = new DefaultHttpClient();
-	   		    HttpGet httpGet = new HttpGet("http://192.168.0.163:8080/pins/alloff");
+	   		    HttpGet httpGet = new HttpGet("http://10.129.21.44:8080/pins/alloff");
 	   		    HttpResponse httpResponse = null;
 				try {
 					httpResponse = httpClient.execute(httpGet);
