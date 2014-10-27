@@ -298,19 +298,6 @@ module.exports = function(app) {
         }
     });
 
-    //Update schedule
-    app.put('/schedules', function(req, res) {
-        var id = req.param('id');
-        var name = req.param('name');
-        if (id === null || name === null || enabled === null) {
-            res.statusCode = 400;
-            return res.send('Error 400: update syntax incorrect.');
-        }
-        db.getDb().run('update schedules set name = ? where id = ?', name, id);
-        res.json(true);
-        db.log('Schedule updated id '+id);
-    });
-
     //Delete schedule + Rules
     app.delete('/schedules', function(req, res) {
         var err = false;
@@ -340,24 +327,28 @@ module.exports = function(app) {
     app.post('/schedules/enabled', function(req, res) {
         var err = false;
         var schedule_id = req.param('schedule_id');
+		console.log(schedule_id);
         var enabled = req.param('enabled');
-
-        if (schedule_id === null) {
+		
+        if (schedule_id === null || enabled === null) {
             res.statusCode = 400;
             return res.send('Error 400: Post syntax incorrect.');
         }
-        db.getDb().run('update schedules set (enabled) values (?) where schedule_id = ?', enabled,schedule_id, function(error){
+        db.getDb().run('update schedules set enabled=? where id = ?', enabled,schedule_id, function(error){
             console.log(error);
             err = true;
 
         });
-        if(enabled && !err){
+		console.log('test: '+enabled);
+        if(enabled === 'true' && !err){
             db.log('Schedule enabled id '+schedule_id);
+			console.log('Schedule enabled id '+schedule_id);
             scheduler.enableSchedule(schedule_id);
         }
-        else if(!enabled && !err){
+        else if(enabled === 'false' && !err){
             db.log('Schedule disabled id '+schedule_id);
-            schduler.disableSchedule(schedule_id);
+			console.log('Schedule disabled id '+schedule_id);
+            scheduler.disableSchedule(schedule_id);
         }
         res.json(err);
     });
@@ -401,23 +392,25 @@ module.exports = function(app) {
                     err = true;
                 }
                 if(!err) {
-                scheduler.ruleAdded(rows[0]['max(id)']);
+                    scheduler.ruleAdded(rows[0]['max(id)']);
+                    res.json(rows[0]['max(id)']);    
                 }           
             });
         }
-        
-        res.json(err);
+        else {
+            res.json(err);
+        }
     });
 
     //Update rules from specific schedule
-    app.put('/rules', function(req, res) {
+    app.post('/rules/update', function(req, res) {
         var err = false;
         var id = req.param('id');
         var devices_id = req.param('devices_id');
         var cron = req.param('cron');
         var schedules_id = req.param('schedules_id');
         var onoff = req.param('onoff');
-        if (id === null || name === null || enabled === null) {
+        if (id === null || devices_id === null || cron === null || schedules_id === null || onoff === null) {
             res.statusCode = 400;
             return res.send('Error 400: update syntax incorrect.');
         }

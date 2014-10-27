@@ -15,7 +15,7 @@
         <ul class="list-group">
           <li class="list-group-item"><a id="turn-off-all-devices" href="#">Switch all devices OFF</a></li>
           <li class="list-group-item"><a id="turn-on-all-devices" href="#">Switch all devices ON</a></li>
-          <li class="list-group-item"><a href="#" data-toggle="modal" data-target="#addDevice"><i class="glyphicon glyphicon-plus"></i> Add a device</a></li>
+          <li class="list-group-item"><a href="#" id="open-new-device-modal" data-toggle="modal" data-target="#addDevice"><i class="glyphicon glyphicon-plus"></i> Add a device</a></li>
         </ul>
       </div>
     </div>
@@ -38,6 +38,7 @@
       <!-- start dialogs -->
       <div id="dialogs">
 
+        <!-- MODIFY DEVICE MODAL -->
         <div class="modal fade" id="deviceSettings" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -65,6 +66,7 @@
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
+        <!-- ADD NEW DEVICE MODAL -->
         <div class="modal fade" id="addDevice" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -77,6 +79,7 @@
                   <div class="form-group">
                     <label for="naamApparaat">Name: </label>
                     <input type="text" class="form-control" id="nameDevice" placeholder="Kitchen lights">
+                    <small class="text-danger new-device-errors"></small>
                   </div>
                   <select id="selectGPIO" class="form-control"></select>
                 </form>

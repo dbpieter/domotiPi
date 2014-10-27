@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-  <div id="schedules">
+  <div id="schedules-page">
 
     <!-- the errors will show here -->
     <div id="errors"></div>
@@ -22,6 +22,7 @@
       <!-- start schemas -->
       <div class="col-md-9">
         <div id="schedules">
+          <div id="schedules-info"></div>
           <div class="panel-group" id="accordion"></div>
         </div>
       </div>
@@ -87,14 +88,15 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+  </div>
 
     <!-- NEW RULE MODAL -->
-    <div class="modal fade" id="new-rule-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="new-rule-modal" tabindex="1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">New rule for &lt;name of schedule&gt;</h4>
+            <h4 class="modal-title">New rule</h4>
           </div>
           <div class="modal-body">
             <form> 
@@ -103,26 +105,25 @@
               </div>
               <div class="form-group">
                 <label for="select-cron-device">Choose a device</label>
-                <select id="select-cron-device" name="select-cron-device" class="form-control"></select>
+                <select id="select-cron-device-new-rule" name="select-cron-device" class="form-control"></select>
               </div>
               <div class="form-group">
                 <label for="select-cron-device-value">ON or OFF?</label>
-                <select id="select-cron-device-value" name="select-cron-device-value" class="form-control">
+                <select id="select-cron-device-value-new-rule" name="select-cron-device-value" class="form-control">
                   <option value="1">ON</option>
                   <option value="0">OFF</option>
                 </select>
               </div>
             </form>
-          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-            <button id="btnSaveRule" type="button" class="btn btn-primary btn-sm">Save</button>
+            <button id="btnNewRule" type="button" class="btn btn-primary btn-sm">Save</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
   </div>
+</div>
 @stop
 
 @section('js')

@@ -23,56 +23,8 @@
       <div class="col-md-9">
         <h3>Logbook</h3>
         <br />
-        <div class="logbook-entries">
+        <div id="logbook-entries">
 
-          <div class="logbook-entry">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="logbook-entry-time">
-                  03/03/2014 17:03:10
-                </div>
-              </div>
-              <div class="col-md-9">
-                <div class="logbook-entry-action">
-                  User "Hans" switched on Kitchen lights
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <hr>
-
-          <div class="logbook-entry">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="logbook-entry-time">
-                  03/03/2014 14:10:10
-                </div>
-              </div>
-              <div class="col-md-9">
-                <div class="logbook-entry-action">
-                  Schedule "Vacation" switched on kitchen lights, toilet light and TV
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <hr>
-
-          <div class="logbook-entry">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="logbook-entry-time">
-                  03/03/2014 13:07:10
-                </div>
-              </div>
-              <div class="col-md-9">
-                <div class="logbook-entry-action">
-                  User "Hans" switched on toilet light
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -81,5 +33,49 @@
 @stop
 
 @section('js')
+  <script>
 
+    var apiUrl = 'http://' + location.host + ':8080';
+
+    var addLogEntryHTML = function(date, message) {
+      var html = '<div class="logbook-entry">';
+      html += '      <div class="row">';
+      html += '        <div class="col-md-3">';
+      html += '          <div class="logbook-entry-time">';
+      html += date;
+      html += '          </div>';
+      html += '        </div>';
+      html += '        <div class="col-md-9">';
+      html += '          <div class="logbook-entry-action">';
+      html += message;
+      html += '          </div>';
+      html += '        </div>';
+      html += '      </div>';
+      html += '    </div>';
+      html += '    <hr>';
+      $('#logbook-entries').prepend(html);
+    }
+
+    var loadLogs = function() {
+
+      $.ajax({
+        url: apiUrl + '/logs',
+        type: 'GET',
+        success: function(result) {
+          $.each(result, function() {
+            addLogEntryHTML(this['time'], this['message']);
+          });
+        }
+      });
+    }
+
+    // var auto_refresh = setInterval(function() {
+    //   $('#logbook-entries').html('');
+    //   loadLogs();
+    // }, 10000);
+
+    $(document).ready(function() {
+      loadLogs();
+    });
+  </script>
 @stop

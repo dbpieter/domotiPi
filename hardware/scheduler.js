@@ -57,8 +57,8 @@ loadSchedules();
  */
 function terminateRule(jobId) {
     for (var i = jobs.length - 1; i >= 0; i--) {
-        if (jobs['info']['id'] === jobId) {
-            jobs['job'].stop();
+        if (jobs[i]['info']['id'] === jobId) {
+            jobs[i]['job'].stop();
             jobs.splice(i, 1);
         }
     }
@@ -68,9 +68,11 @@ function terminateRule(jobId) {
  * terminates all jobs in a schedule
  */
 function disableSchedule(scheduleId) {
+	console.log('schedule disabled: '+scheduleId);
     for (var i = jobs.length - 1; i >= 0; i--) {
-        if (jobs['info']['schedule_id'] === scheduleId) {
-            jobs['job'].stop();
+        if (jobs[i]['info']['schedule_id'] === scheduleId) {
+            jobs[i]['job'].stop();
+			console.log('job removed '+jobs[i]);
             jobs.splice(i, 1);
         }
     }
@@ -88,9 +90,8 @@ function enableSchedule(scheduleId) {
  */
 function ruleAdded(ruleId) {
     console.log(ruleId);
-    db.getDb().all('select * from rules inner join schedules on schedules.id = rules.schedules_id inner join devices on devices.id = rules.devices_id where schedules.enabled = \'true\' and rules.id = ?;', ruleId, function(err, rows) {
+    db.getDb().all('select * from rules inner join schedules on schedules.id = rules.schedules_id inner join devices on devices.id = rules.devices_id where rules.id = ?;', ruleId, function(err, rows) {
         console.log(rows[0]);
-        console.log(rows);
         newJob(rows[0]);
     });
 }
@@ -108,7 +109,7 @@ function isScheduleRunning(scheduleID) {
  * first remove it than reload it
  */
 function ruleUpdated(ruleId){
-    console.log('rule updated')
+	console.log('rule updated')
     terminateRule(ruleId);
     ruleAdded(ruleId);
 }

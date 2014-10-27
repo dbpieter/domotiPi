@@ -1,0 +1,4 @@
+Korte beschrijving voor bvb YouTube video
+
+Het doel van dit project is het creëren van een domotica systeem dat makkelijk aanstuurbaar is, goedkoop en uitbreidbaar.
+Hierbij heeft men gebruik gemaakt van een Raspberry Pi en een API geschreven in Node.JS.

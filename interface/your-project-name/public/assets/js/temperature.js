@@ -1,10 +1,11 @@
-var apiUrl = 'http://' + '192.168.0.163' + ':8080';
+var apiUrl = 'http://' + location.host + ':8080';
 var labels;
 var temps;
 var d;
+var amountGraph = 25;
 
 var getChartData = function() {
-  var link = apiUrl + '/templog/20';
+  var link = apiUrl + '/templog/' + amountGraph;
   var jqxhr = $.ajax(link)
   .done(function(data) {
     d = data;
@@ -20,9 +21,9 @@ var getChartData = function() {
 var generateTemperatureData = function() {
     labels = new Array();
     temps = new Array();
-    for (var i = 0; i < d.length; i++) {
-      temps.push(Math.round( parseFloat(d[i].temperature) * 10 ) / 10);
-      labels.push(d[i].time.substring(10).substring(0,5));
+    for (var i = d.length - 1; i >= 0; i--) {
+      temps.push(Math.round(parseFloat(d[i].temperature) * 10 ) / 10);
+      labels.push(d[i].time.substring(10));
     }
 }
 
@@ -35,7 +36,7 @@ var createChart = function() {
       //Number - The value jump in the hard coded scale
       scaleStepWidth : 2,
       //Number - The scale starting value
-      scaleStartValue : 16,
+      scaleStartValue : 16
     }
 
     //Get context with jQuery - using jQuery's .get() method.
